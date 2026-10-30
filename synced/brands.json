@@ -1,0 +1,29 @@
+{
+  "classic": {
+    "palette": { "primary": "#0d4d4d", "accent": "#c8a96a", "bg": "#f6f1e7", "ink": "#16302f", "red": "#b5544a" },
+    "fonts": { "head": "Montserrat", "accent": "Cormorant" },
+    "logo": "img/logo.png",
+    "cta": {
+      "eyebrow": "READY FOR THE NEXT STEP?",
+      "title": "Book a free call",
+      "detail": "For founders who want ops off their plate",
+      "url": "yoursite.com/call",
+      "footnote": "Link in the first comment"
+    },
+    "fix_words": {}
+  },
+  "bright": {
+    "palette": { "primary": "#2E6F73", "accent": "#FFCC00", "bg": "#FAF7F0", "ink": "#4B5563", "red": "#b5544a" },
+    "fonts": { "head": "Public Sans", "accent": "Public Sans" },
+    "logo": "img/logo.png",
+    "cta": {
+      "eyebrow": "WANT THIS IN YOUR BUSINESS?",
+      "title": "Join the free class",
+      "detail": "Live on Zoom  ·  Seats are limited",
+      "url": "yoursite.com/class",
+      "footnote": "Link in the first comment"
+    },
+    "fix_words": {},
+    "extra_css": ".ttl { color:var(--primary); font-size:84px; font-weight:900; } .ttl::after { content:''; display:block; width:220px; height:12px; margin:14px auto 0; border-radius:6px; background:var(--accent); } .grade { font-size:120px; font-weight:900; } .chip.gold { font-size:48px; padding:20px 40px; font-weight:900; } .bigc { font-size:72px; font-weight:900; }"
+  }
+}

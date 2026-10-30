@@ -1,0 +1,10 @@
+.DS_Store
+.hyperframes/
+node_modules/
+synced/hf-*/
+synced/demo*.mp4
+synced/demo*.jpg
+synced/demo-words.json
+synced/*.wav
+synced/*.aiff
+*.err

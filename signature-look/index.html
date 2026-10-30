@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+<!-- Signature look, 10 s motion sample: hook word struck out, shape morph, 3D letter-flip payoff word, rotating rings, sparkles, 3D logo card. Swap the words, keep the timing. -->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+@font-face { font-family:"Cormorant"; src:url("assets/fonts/CormorantGaramond-VariableFont_wght.ttf"); font-weight:300 700; }
+@font-face { font-family:"Cormorant"; font-style:italic; src:url("assets/fonts/CormorantGaramond-Italic-VariableFont_wght.ttf"); font-weight:300 700; }
+@font-face { font-family:"Montserrat"; src:url("assets/fonts/Montserrat-VariableFont_wght.ttf"); font-weight:100 900; }
+@font-face { font-family:"Public Sans"; src:url("assets/fonts/PublicSans-900.ttf"); font-weight:800 900; }
+/* Brand: change these five colors (and the logo in assets/img/logo.png) to re-skin the whole piece */
+:root { --teal:#0d4d4d; --cream:#f6f1e7; --gold:#c8a96a; --char:#2b2b2b; --dim:rgba(43,43,43,.5); }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:var(--cream); }
+#root { position:relative; width:1080px; height:1920px; overflow:hidden; background:var(--cream); }
+.clip { position:absolute; left:0; top:0; width:1080px; height:1920px; }
+.w { display:inline-block; }
+
+/* Scene A: the hook */
+#aIn { position:absolute; inset:0; }
+#eyebrow { position:absolute; top:680px; width:1080px; text-align:center; font-family:"Montserrat"; font-weight:600;
+  font-size:40px; letter-spacing:.32em; color:var(--teal); }
+#hookword { position:absolute; top:760px; width:1080px; text-align:center; font-family:"Public Sans"; font-weight:900;
+  font-size:150px; line-height:1; color:var(--char); letter-spacing:-.02em; }
+#strike { position:absolute; left:90px; width:900px; top:830px; height:16px; border-radius:8px; background:var(--gold); transform-origin:0 50%; }
+#aLine { position:absolute; top:1020px; width:1080px; text-align:center; font-family:"Cormorant"; font-style:italic; font-weight:500;
+  font-size:64px; color:var(--teal); }
+
+/* Morph shape: gold circle badge -> rotated square -> teal fill */
+#morph { position:absolute; left:440px; top:1190px; width:200px; height:200px; border-radius:100px; background:var(--gold); }
+
+/* Scene B: the payoff */
+#bIn { position:absolute; inset:0; background:var(--teal); perspective:1400px; }
+#cam { position:absolute; inset:0; transform-origin:50% 42%; }
+#ring { transform-origin:50% 50%; position:absolute; left:190px; top:420px; width:700px; height:700px; border-radius:350px; border:3px solid rgba(200,169,106,.55); }
+#ringDot { position:absolute; left:337px; top:-11px; width:22px; height:22px; border-radius:11px; background:var(--gold); }
+#ring2 { transform-origin:50% 50%; position:absolute; left:250px; top:480px; width:580px; height:580px; border-radius:290px; border:2px dashed rgba(246,241,231,.25); }
+#lead { position:absolute; top:610px; width:1080px; text-align:center; font-family:"Montserrat"; font-weight:700;
+  font-size:76px; letter-spacing:.04em; color:var(--cream); }
+#payoff { position:absolute; top:700px; width:1080px; text-align:center; font-family:"Cormorant"; font-style:italic; font-weight:600;
+  font-size:210px; line-height:1.05; color:var(--gold); transform-style:preserve-3d; }
+#payoff .w { transform-origin:50% 100%; }
+#uline { position:absolute; left:210px; width:660px; top:950px; height:6px; border-radius:3px; background:var(--cream); transform-origin:50% 50%; }
+.spark { position:absolute; width:56px; height:56px; }
+.spark svg { width:100%; height:100%; display:block; }
+
+/* Scene C: the card */
+#card { position:absolute; left:140px; top:1060px; width:800px; height:250px; border-radius:28px; background:var(--cream);
+  box-shadow:0 30px 60px rgba(0,0,0,.25); display:flex; align-items:center; gap:34px; padding:0 44px; transform-origin:50% 50%; }
+#badge { flex:none; width:170px; height:170px; border-radius:85px; background:#fff; box-shadow:0 0 0 4px var(--gold); overflow:hidden; }
+#badge img { width:100%; height:100%; display:block; }
+#cardTxt .k { font-family:"Montserrat"; font-weight:700; font-size:30px; letter-spacing:.2em; color:var(--teal); }
+#cardTxt .t { margin-top:10px; font-family:"Cormorant"; font-style:italic; font-weight:600; font-size:52px; line-height:1.05; color:var(--char); }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="10" data-width="1080" data-height="1920">
+
+  <div id="sceneA" class="clip" data-start="0" data-duration="3.4" data-track-index="1"><div id="aIn">
+    <div id="eyebrow">STOP BEING THE</div>
+    <div id="hookword" data-layout-allow-occlusion><span class="w">Bottle</span><span class="w">neck.</span></div>
+    <div id="strike" data-layout-allow-occlusion></div>
+    <div id="aLine"><span class="w">Your</span> <span class="w">team</span> <span class="w">can</span> <span class="w">already</span> <span class="w">execute.</span></div>
+  </div></div>
+
+  <div id="morphHost" class="clip" data-start="1.9" data-duration="1.6" data-track-index="2"><div id="morph"></div></div>
+
+  <div id="sceneB" class="clip" data-start="3.2" data-duration="6.8" data-track-index="3"><div id="bIn"><div id="cam">
+    <div id="ring2"></div>
+    <div id="ring"><div id="ringDot"></div></div>
+    <div id="lead"><span class="w">Lead</span> <span class="w">with</span></div>
+    <div id="payoff"><span class="w">s</span><span class="w">y</span><span class="w">s</span><span class="w">t</span><span class="w">e</span><span class="w">m</span><span class="w">s</span><span class="w">.</span></div>
+    <div id="uline"></div>
+    <div class="spark" id="s1" style="left:150px;top:560px"><svg viewBox="0 0 40 40"><path d="M20 0 C21 14 26 19 40 20 C26 21 21 26 20 40 C19 26 14 21 0 20 C14 19 19 14 20 0Z" fill="#c8a96a"/></svg></div>
+    <div class="spark" id="s2" style="left:900px;top:600px;width:40px;height:40px"><svg viewBox="0 0 40 40"><path d="M20 0 C21 14 26 19 40 20 C26 21 21 26 20 40 C19 26 14 21 0 20 C14 19 19 14 20 0Z" fill="#f6f1e7"/></svg></div>
+    <div class="spark" id="s3" style="left:820px;top:520px;width:30px;height:30px"><svg viewBox="0 0 40 40"><path d="M20 0 C21 14 26 19 40 20 C26 21 21 26 20 40 C19 26 14 21 0 20 C14 19 19 14 20 0Z" fill="#c8a96a"/></svg></div>
+    <div class="spark" id="s4" style="left:200px;top:980px;width:36px;height:36px"><svg viewBox="0 0 40 40"><path d="M20 0 C21 14 26 19 40 20 C26 21 21 26 20 40 C19 26 14 21 0 20 C14 19 19 14 20 0Z" fill="#f6f1e7"/></svg></div>
+    <div id="card">
+      <div id="badge"><img src="assets/img/logo.png" alt="Logo"></div>
+      <div id="cardTxt"><div class="k">YOUR BRAND · POINT 3</div><div class="t">Build it once.<br>Run it forever.</div></div>
+    </div>
+  </div></div></div>
+
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+
+// A: hook already on screen at frame 0, then the strike
+tl.fromTo("#hookword .w", { y: 0 }, { y: -6, duration: 0.8, ease: "sine.inOut", stagger: 0.1 }, 0);
+tl.fromTo("#strike", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "power3.out" }, 0.7);
+tl.to("#hookword", { color: "var(--dim)", duration: 0.25 }, 0.8);
+tl.from("#aLine .w", { opacity: 0, y: 30, filter: "blur(6px)", duration: 0.3, stagger: 0.09, ease: "power4.out" }, 1.0);
+tl.to("#aIn", { scale: 0.9, opacity: 0, filter: "blur(10px)", duration: 0.5, ease: "power3.in" }, 2.6);
+
+// morph: circle -> rotated square -> fills the frame
+tl.from("#morph", { scale: 0, duration: 0.35, ease: "back.out(2)" }, 1.9);
+tl.to("#morph", { borderRadius: 24, rotation: 45, duration: 0.45, ease: "power3.inOut" }, 2.3);
+tl.to("#morph", { backgroundColor: "#0d4d4d", duration: 0.3 }, 2.6);
+tl.to("#morph", { scale: 14, rotation: 135, y: -300, duration: 0.65, ease: "expo.in" }, 2.75);
+
+// B: slow camera push over the whole scene
+tl.fromTo("#cam", { scale: 1.12 }, { scale: 1, duration: 1.0, ease: "expo.out" }, 3.2);
+tl.to("#cam", { scale: 1.06, duration: 3.6, ease: "none" }, 4.2);
+tl.from("#ring", { scale: 0.4, opacity: 0, duration: 0.8, ease: "expo.out" }, 3.3);
+tl.fromTo("#ring", { rotation: 0 }, { rotation: 300, duration: 6.7, ease: "none" }, 3.3);
+tl.from("#ring2", { scale: 1.4, opacity: 0, duration: 0.9, ease: "expo.out" }, 3.4);
+tl.fromTo("#ring2", { rotation: 0 }, { rotation: -120, duration: 6.6, ease: "none" }, 3.4);
+tl.from("#lead .w", { opacity: 0, y: 60, duration: 0.35, stagger: 0.12, ease: "power4.out" }, 3.5);
+tl.from("#payoff .w", { opacity: 0, rotationX: -95, y: 40, duration: 0.55, stagger: 0.06, ease: "back.out(1.6)" }, 4.0);
+tl.fromTo("#uline", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "expo.out" }, 4.9);
+["#s1", "#s2", "#s3", "#s4"].forEach((s, i) => {
+  tl.fromTo(s, { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(3)" }, 5.0 + i * 0.12);
+  tl.to(s, { rotation: 90, duration: 4, ease: "none" }, 5.5 + i * 0.12);
+});
+
+// C: the 3D card swings in, headline lifts to make room
+tl.to("#lead, #payoff, #uline", { y: -150, duration: 0.7, ease: "power3.inOut" }, 6.6);
+tl.to("#ring, #ring2", { y: -150, duration: 0.7, ease: "power3.inOut" }, 6.6);
+tl.fromTo("#card", { rotationY: 75, x: 260, opacity: 0 }, { rotationY: 0, x: 0, opacity: 1, duration: 0.9, ease: "expo.out" }, 6.9);
+tl.from("#badge", { scale: 0, rotation: -180, duration: 0.6, ease: "back.out(2)" }, 7.2);
+tl.from("#cardTxt > div", { opacity: 0, x: 30, duration: 0.4, stagger: 0.15, ease: "power4.out" }, 7.4);
+tl.to("#card", { rotationY: -6, rotationX: 4, duration: 2.1, ease: "sine.inOut" }, 7.8);
+
+window.__timelines["main"] = tl;
+tl.seek(0);
+</script>
+</body>
+</html>
